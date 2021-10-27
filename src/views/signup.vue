@@ -15,9 +15,9 @@
     </div>
     <!-- date de naissance -->
     <div class="inputfield">
-        <span class="p-float-label">
-      <Calendar id="birthdate" v-model="birthdate" dateFormat="dd.mm.yy" />
-      <Label for="birthdate"> Votre date de naissance</Label>
+      <span class="p-float-label">
+        <Calendar id="birthdate" v-model="birthdate" dateFormat="dd.mm.yy" />
+        <Label for="birthdate"> Votre date de naissance</Label>
       </span>
     </div>
 
@@ -34,44 +34,64 @@
         <label for="password">Votre mot de passe</label>
       </span>
     </div>
+    <div>
+      <Button
+        label="Envoyer"
+        icon="pi pi-check"
+        iconPos="right"
+        @click="onvalidatebuttonclicked"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-
-// import {signup} from "../api/auth.api";
+import { signup } from "../api/auth.api";
 
 export default {
   data() {
     return {
       name: null,
-      firstmane: null,
+      firstname: null,
       birthdate: null,
       email: null,
       password: null,
     };
-
   },
-  methods : {onvalidatebuttonclicked (){
+  methods: {
+    onvalidatebuttonclicked() {
+      const usersubscribing = {};
+        usersubscribing.name =  this.name
+        usersubscribing.firstname = this.firstname
+        usersubscribing.birthdate = this.birthdate
+        usersubscribing.email = this.email
+        usersubscribing.password = this.password
+      signup(usersubscribing)
+      .then(response => {console.log(response)
+      this.$router.push("/login")}
+      
+      // mettre en place redirection vers Login
+      )
+      .catch(
 
-  } } 
+        // message d'erreur si echec
+      );
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-.container{
-    border: 2px red dotted;
-    border-radius: 10px;
-    margin : 20px
-
-
+.container {
+  border: 2px red dotted;
+  border-radius: 10px;
+  margin: 20px;
 }
 .inputfield {
   width: 200px;
   margin: 30px auto;
 }
-.p-inputtext{
-    width: 200px
+.p-inputtext {
+  width: 200px;
 }
 </style>

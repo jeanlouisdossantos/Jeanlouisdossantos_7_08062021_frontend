@@ -2,12 +2,24 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import signup from '../views/signup.vue'
+import Createpost from '../views/Createpost.vue'
+import store from '../store'
 
 const routes = [
   {
+    
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter : (to,from,next)=>{ 
+      if(store.getters.isLogged) {
+        
+        next()}
+      else {
+        alert("vous n'etes pas connecter")
+        next({name :"Login"})}
+    
+    }
   },
   {
     path: '/about',
@@ -26,6 +38,21 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: signup
+  },
+  {
+    path: '/createpost',
+    name: 'createpost',
+    component: Createpost,
+    beforeEnter : (to,from,next)=>{ 
+      if(store.getters.isLogged) {
+        
+        next()}
+      else {
+      
+        alert("vous n'avez pas acces ici")
+        next({name :"Login"})}
+    
+    }
   }
 ]
 

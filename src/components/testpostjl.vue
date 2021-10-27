@@ -1,32 +1,59 @@
 <template>
-
   <div id="maincontainer" class="test">
-    <Card>
+    <Card
+      class="card"
+      v-for="post in posts"
+      :key="post.postid"
+      id="post.postid"
+    >
       <template #header>
-        <img
-          id="defaultlogo"
-          alt="company logo"
-          :src="companylogo"
-          v-if="(posts[0].imageurl = 'bla')"
-        />
-        <img src="" alt="" v-else />
+        <img id="defaultlogo" alt="company logo" :src="companylogo" />
+        <img :src="post.imageurl" alt="" />
       </template>
       <template #title>
-        <p>{{ posts[0].title }}</p>
+        <p>{{ post.title }}</p>
       </template>
       <template #content>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-        consequuntur error repudiandae numquam deserunt quisquam repellat libero
-        asperiores earum nam nobis, culpa ratione quam perferendis esse,
-        cupiditate neque quas!
+        {{ post.content }}
       </template>
       <template #footer>
-        <Card id="commentcard">
+        <Card
+          id="commentcard"
+          v-for="comment in post.comment"
+          :key="comment.id"
+        >
           <template #content style="margin-left: 40px">
-            <h4>COmmentaire 1</h4>
-            <p>comentaire 1 blablabla</p>
+            <div class="commentaire">
+              <p>{{ comment.content }}</p>
+            </div>
+            <div class="user">
+              <p>commentaire de {{ comment.User.user }}</p>
+            </div>
           </template>
         </Card>
+
+        <!-- ENglober cela dans un formulaire -->
+
+        <div class="commentaire">
+          <h2>Ajouter un commentaire à ce post</h2>
+          <div class="container">
+            <div class="inputfield">
+              <span class="p-float-label">
+                <InputText
+                  id="commentcontent"
+                  type="text"
+                  v-model="commentcontent"
+                />
+                <label for="name">Votre commentaire : </label>
+              </span>
+            </div>
+
+            <Button
+              label="Poster le commentaire"
+              @click="createOneComment($event, post.postid)"
+            />
+          </div>
+        </div>
       </template>
     </Card>
   </div>
@@ -34,37 +61,44 @@
 
 <script>
 import companylogo from "../assets/groupomania.png";
+import { getAllPost, createOneComment } from "../api/post.api";
+import store from "../store";
 
 export default {
   data() {
     return {
       companylogo: companylogo,
-      message1: "message1",
-      text: "test",
-      posts: [
-        {
-          postid: 2,
-          user_id: 2,
-          title: "test 2",
-          content: "test 2",
-          imageurl: "bla",
-          created_at: "2021-06-30T21:43:46.000Z",
-          like: [],
-        },
-      ],
+      posts: [],
+      commentcontent: null,
     };
   },
   name: "test",
-  props: ["message"],
   methods: {
-    alert: () => {
-      alert(this.text);
+    createOneComment(event, postid) {
+      const comment = {};
+      comment.content = this.commentcontent;
+      comment.post_id = postid;
+      const token = store.state.token;
+
+      createOneComment(comment, token)
+        .then(() => {this.$router.replace("/");
+        })
+        .catch((error) => console.log(error));
     },
+  },
+
+  created() {
+    getAllPost().then((response) => {
+      this.posts = response.data;
+    });
   },
 };
 </script>
 
 <style scoped>
+.card {
+  margin-top: 10px;
+}
 #maincontainer {
   margin-top: 20px;
 }

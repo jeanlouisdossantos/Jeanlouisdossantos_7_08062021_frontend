@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-     <Testpostjl msg="Welcome to Your Vue.js App"/>
+    
+         <Testpostjl />
   </div>
 </template>
 
@@ -8,11 +9,17 @@
 // @ is an alias to /src
 
 import Testpostjl from '../components/testpostjl.vue'
-
+import store from "../store/index"
 export default {
+  store,
   name: 'Home',
   components: {
     Testpostjl,
+  },
+  computed: {
+    messageBienvenue (){
+      return this.$store.state.message
+    }
   }
 }
 </script>
