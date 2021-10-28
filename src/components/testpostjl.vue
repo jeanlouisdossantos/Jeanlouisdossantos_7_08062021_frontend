@@ -79,9 +79,12 @@ export default {
       comment.content = this.commentcontent;
       comment.post_id = postid;
       const token = store.state.token;
+      // event.preventDefault()
 
       createOneComment(comment, token)
-        .then(() => {this.$router.replace("/");
+        .then(() => {
+          
+          this.$router.push("/");
         })
         .catch((error) => console.log(error));
     },
@@ -92,6 +95,11 @@ export default {
       this.posts = response.data;
     });
   },
+  updated(){
+    getAllPost().then((response) => {
+      this.posts = response.data;
+    });
+  }
 };
 </script>
 
