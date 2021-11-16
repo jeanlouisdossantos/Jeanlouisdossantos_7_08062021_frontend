@@ -1,6 +1,5 @@
 <template>
-
-<!-- englober dans une balsie form -->
+  <!-- englober dans une balsie form -->
   <div class="container">
     <div class="inputfield">
       <span class="p-float-label">
@@ -43,12 +42,13 @@ export default {
 
       login(userlogin)
         .then((re) => {
-          const datastore = {}
-          datastore.token = re.data.token
-          datastore.isadmin = re.data.isAdmin
-          datastore.userid = re.data.userId
+          const datastore = {};
+          datastore.token = re.data.token;
+          datastore.isadmin = re.data.isAdmin;
+          console.log(re.data.isAdmin);
+          datastore.userid = re.data.userId;
           this.$store.commit("login", datastore);
-          this.$router.push("/")
+          this.$router.push("/");
         })
         .catch((error) => console.log(error));
     },

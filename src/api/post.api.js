@@ -37,3 +37,7 @@ export const createOneComment = async (postobject, token) => {
   );
   return response;
 };
+export const deleteOnePost = async (postid, token) =>{
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  axios.delete(process.env.VUE_APP_APIURL+"post/"+postid)
+}

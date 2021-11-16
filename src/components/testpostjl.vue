@@ -15,7 +15,18 @@
       </template>
       <template #content>
         {{ post.content }}
+        
+
+        <div class="supprimmer">
+          <Button
+            label="Supprimer"
+            @click="deleteOnePost(post.postid, post.user_id)"
+            class="p-button-danger"
+            v-if="isOwnPost(post.user_id)"
+          />
+        </div>
       </template>
+
       <template #footer>
         <Card
           id="commentcard"
@@ -61,7 +72,7 @@
 
 <script>
 import companylogo from "../assets/groupomania.png";
-import { getAllPost, createOneComment } from "../api/post.api";
+import { getAllPost, createOneComment, deleteOnePost } from "../api/post.api";
 import store from "../store";
 
 export default {
@@ -79,27 +90,34 @@ export default {
       comment.content = this.commentcontent;
       comment.post_id = postid;
       const token = store.state.token;
-      // event.preventDefault()
-
       createOneComment(comment, token)
         .then(() => {
-          
           this.$router.push("/");
+          getAllPost().then((response) => {
+            this.posts = response.data;
+          });
+          this.commentcontent = null;
         })
         .catch((error) => console.log(error));
     },
+    deleteOnePost(postid) {
+      
+       const posttodelete = postid
+       const token = store.state.token;
+       deleteOnePost(posttodelete, token);
+      
+    },
+    isOwnPost : function (user){
+      return user == store.state.userid || store.state.isAdmin
+    }
   },
 
   created() {
     getAllPost().then((response) => {
       this.posts = response.data;
+      console.log(response.data[0])
     });
   },
-  updated(){
-    getAllPost().then((response) => {
-      this.posts = response.data;
-    });
-  }
 };
 </script>
 
