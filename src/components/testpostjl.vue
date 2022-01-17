@@ -6,18 +6,20 @@
       :key="post.postid"
       id="post.postid"
     >
-    <likecounter/>
       <template #header class="header">
         <img id="defaultlogo" alt="company logo" :src="companylogo" />
-        <img :src="post.imageurl" alt="" class="imgcontainer"/>
+        <img :src="post.imageurl" alt="" class="imgcontainer" />
+
+        <Likes :likesarray=post.like />
+
+
       </template>
       <template #title>
         <p>{{ post.title }}</p>
       </template>
-      
+
       <template #content>
         {{ post.content }}
-        
 
         <div class="supprimmer">
           <Button
@@ -79,7 +81,7 @@ import store from "../store";
 
 
 export default {
-
+ 
   data() {
     return {
       companylogo: companylogo,
@@ -105,28 +107,26 @@ export default {
         .catch((error) => console.log(error));
     },
     deleteOnePost(postid) {
-      
-       const posttodelete = postid
-       const token = store.state.token;
-       deleteOnePost(posttodelete, token);
-      
+      const posttodelete = postid;
+      const token = store.state.token;
+      deleteOnePost(posttodelete, token);
     },
-    isOwnPost : function (user){
-      return user == store.state.userid || store.state.isAdmin
-    }
+    isOwnPost: function(user) {
+      return user == store.state.userid || store.state.isAdmin;
+    },
   },
 
   created() {
     getAllPost().then((response) => {
       this.posts = response.data;
-     console.log(this.posts) 
+      console.log(this.posts);
     });
   },
 };
 </script>
 
 <style scoped>
-.header{
+.header {
   display: flex;
   flex-flow: column wrap;
 }
@@ -143,7 +143,7 @@ export default {
   margin-top: 30px;
   width: 120px;
 }
-.imgcontainer{
+.imgcontainer {
   width: 200px;
 }
 </style>
