@@ -5,6 +5,7 @@
       <router-link to="/signup">Inscription | </router-link>
       <router-link to="/" v-if="token">Voir les post | </router-link>
       <router-link to="/about">A propos | </router-link>
+      <router-link to="/User" v-if="token" >User | </router-link>
     </div>
 
     <div class="createPost">

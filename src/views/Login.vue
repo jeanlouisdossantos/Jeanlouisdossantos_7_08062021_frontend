@@ -45,7 +45,6 @@ export default {
           const datastore = {};
           datastore.token = re.data.token;
           datastore.isadmin = re.data.isAdmin;
-          console.log(re.data.isAdmin);
           datastore.userid = re.data.userId;
           this.$store.commit("login", datastore);
           this.$router.push("/");

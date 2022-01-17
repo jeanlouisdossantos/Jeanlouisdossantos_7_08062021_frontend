@@ -17,9 +17,6 @@ export const createOnePost = async (postobject, token) => {
       },
     };
   }
-
-  // {"Content-Type" : "multipart/form-data"}
-
   let response = await axios.post(
     process.env.VUE_APP_APIURL + "post/",
     postobject,

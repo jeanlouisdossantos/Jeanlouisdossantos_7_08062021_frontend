@@ -15,11 +15,6 @@ export default {
   name: 'Home',
   components: {
     Testpostjl,
-  },
-  computed: {
-    messageBienvenue (){
-      return this.$store.state.message
-    }
   }
 }
 </script>

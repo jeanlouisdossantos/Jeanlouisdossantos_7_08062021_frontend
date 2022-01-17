@@ -12,7 +12,7 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Card from 'primevue/card';
 import Calendar from 'primevue/calendar';
-import FileUpload from 'primevue/fileupload';
+import likemodel from './components/likecounter.vue'
 
 
 import "primevue/resources/themes/bootstrap4-light-blue/theme.css" //theme
@@ -27,7 +27,7 @@ app.component("InputText", InputText)
 app.component("Button", Button )
 app.component("Card", Card )
 app.component("Calendar" , Calendar)
-app.component("FileUpload" , FileUpload)
+app.component("Likes", likemodel)
 
 app.use(router).use(store).mount('#app');
 

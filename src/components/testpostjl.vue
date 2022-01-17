@@ -6,13 +6,15 @@
       :key="post.postid"
       id="post.postid"
     >
-      <template #header>
+    <likecounter/>
+      <template #header class="header">
         <img id="defaultlogo" alt="company logo" :src="companylogo" />
-        <img :src="post.imageurl" alt="" />
+        <img :src="post.imageurl" alt="" class="imgcontainer"/>
       </template>
       <template #title>
         <p>{{ post.title }}</p>
       </template>
+      
       <template #content>
         {{ post.content }}
         
@@ -75,7 +77,9 @@ import companylogo from "../assets/groupomania.png";
 import { getAllPost, createOneComment, deleteOnePost } from "../api/post.api";
 import store from "../store";
 
+
 export default {
+
   data() {
     return {
       companylogo: companylogo,
@@ -115,13 +119,17 @@ export default {
   created() {
     getAllPost().then((response) => {
       this.posts = response.data;
-      console.log(response.data[0])
+     console.log(this.posts) 
     });
   },
 };
 </script>
 
 <style scoped>
+.header{
+  display: flex;
+  flex-flow: column wrap;
+}
 .card {
   margin-top: 10px;
 }
@@ -134,5 +142,8 @@ export default {
 #defaultlogo {
   margin-top: 30px;
   width: 120px;
+}
+.imgcontainer{
+  width: 200px;
 }
 </style>
