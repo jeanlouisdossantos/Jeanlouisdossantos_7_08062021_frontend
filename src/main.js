@@ -12,6 +12,8 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Card from 'primevue/card';
 import Calendar from 'primevue/calendar';
+
+/**import du composant compteur de like */
 import likemodel from './components/likecounter.vue'
 
 

@@ -10,7 +10,7 @@
         <img id="defaultlogo" alt="company logo" :src="companylogo" />
         <img :src="post.imageurl" alt="" class="imgcontainer" />
 
-        <Likes :likesarray=post.like />
+        <Likes :likesarray=post.like :postid=post.postid />
 
 
       </template>
