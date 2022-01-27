@@ -24,11 +24,11 @@ export default {
       console.log(this.hasliked)
       if(this.hasliked){
         /**delete like */
-        deletelike({userid : store.state.userid , type  : "LIKE" , postid : this.postid})
+        deletelike({userid : store.state.userid , type  : "LIKE" , postid : this.postid},store.state.token)
       }
       else{
         /**create like */
-        createlike({userid : store.state.userid, type : "LIKE", postid : this.postid})
+        createlike({userid : store.state.userid, type : "LIKE", postid : this.postid}, store.state.token)
       }
     },
     dislikepost : function(){
