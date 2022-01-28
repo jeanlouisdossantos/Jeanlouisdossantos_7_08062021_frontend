@@ -10,7 +10,7 @@
         <img id="defaultlogo" alt="company logo" :src="companylogo" />
         <img :src="post.imageurl" alt="" class="imgcontainer" />
 
-        <Likes :likesarray=post.like :postid=post.postid />
+        <Likes :likesarray=post.like :postid=post.postid v-on:refresh="showrefresh" />
 
 
       </template>
@@ -114,6 +114,14 @@ export default {
     isOwnPost: function(user) {
       return user == store.state.userid || store.state.isAdmin;
     },
+    showrefresh(){ 
+      console.log("refreshed")
+    getAllPost().then((response) => {
+      this.posts = response.data;
+      console.log(this.posts);
+    })  
+      
+      }
   },
 
   created() {
