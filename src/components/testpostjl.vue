@@ -7,7 +7,7 @@
       id="post.postid"
     >
       <template #header class="header">
-        <img id="defaultlogo" alt="company logo" :src="companylogo" />
+        <img id="defaultlogo" alt="company logo" :src="companylogo" v-if="!post.imageurl" />
         <img :src="post.imageurl" alt="" class="imgcontainer" />
 
         <Likes :likesarray=post.like :postid=post.postid v-on:refresh="showrefresh" />
