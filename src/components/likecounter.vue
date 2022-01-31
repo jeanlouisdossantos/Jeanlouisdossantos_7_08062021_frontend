@@ -4,7 +4,7 @@
     <span :class="{ green: hasliked }" @click="likepost"
       ><i class="fas fa-thumbs-up"></i
     ></span>
-    <span>{{ likescount }}{{ likesarray }}</span>
+    <span>{{ likescount }}</span>
     <span :class="{ red: hasdisliked }" @click="dislikepost"
       ><i class="fas fa-thumbs-down"></i
     ></span>
