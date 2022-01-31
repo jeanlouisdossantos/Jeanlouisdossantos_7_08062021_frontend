@@ -4,7 +4,7 @@
     <span :class="{ green: hasliked }" @click="likepost"
       ><i class="fas fa-thumbs-up"></i
     ></span>
-    <span>{{ count}}{{ likesarray}}</span>
+    <span>{{ likescount }}{{ likesarray }}</span>
     <span :class="{ red: hasdisliked }" @click="dislikepost"
       ><i class="fas fa-thumbs-down"></i
     ></span>
@@ -17,12 +17,12 @@ import { createlike, deletelike } from "../api/like.api";
 export default {
   data() {
     return {
-      count: this.likesarray.length,
+      
       userid: store.state.userid,
     };
   },
   methods: {
-    
+
     likepost: function() {
       if (this.hasliked) {
         /**delete like */
@@ -36,12 +36,14 @@ export default {
           { userid: store.state.userid, type: "LIKE", postid: this.postid },
           store.state.token
         );
-        
-        
+
+
 
       }
-      this.$emit("refresh")
-      
+      this.$emit("refresh");
+      this.count = this.likesarray.length
+
+
     },
     dislikepost: function() {
       if (this.hasdisliked) {
@@ -56,14 +58,13 @@ export default {
           { userid: store.state.userid, type: "DISLIKE", postid: this.postid },
           store.state.token
         );
-        
+
       }
       this.$emit("refresh")
-      
-    },
-  },
+      this.count = this.likescount
+  }},
   props: ["likesarray", "postid"],
-  
+
   computed: {
     hasliked: function() {
       return (
@@ -79,7 +80,15 @@ export default {
         ).length >= 1
       );
     },
-  },
+    likescount : function(){
+    return  this.likesarray.filter(
+          (likes) => likes.type == "LIKE"
+        ).length - this.likesarray.filter(
+          (likes) => likes.type == "DISLIKE"
+        ).length
+  }
+  }
+
 };
 </script>
 <style scoped>
