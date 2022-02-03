@@ -1,8 +1,8 @@
 <template>
   <div id="nav">
     <div class="navlist">
-      <router-link to="/login">Connexion | </router-link>
-      <router-link to="/signup">Inscription | </router-link>
+      <router-link to="/login" v-if="!token">Connexion | </router-link>
+      <router-link to="/signup" v-if="!token" >Inscription | </router-link>
       <router-link to="/" v-if="token">Voir les post | </router-link>
       <router-link to="/about">A propos | </router-link>
       <router-link to="/User" v-if="token" >User | </router-link>
