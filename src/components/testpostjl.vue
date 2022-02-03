@@ -154,4 +154,8 @@ export default {
 .imgcontainer {
   width: 200px;
 }
+
+div.commentaire > div > div{
+  margin : 10px 0px
+}
 </style>
