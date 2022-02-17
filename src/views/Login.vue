@@ -7,7 +7,7 @@
         <label for="username">Votre nom d'utilisateur</label>
       </span>
     </div>
-
+<Message severity="error" v-if="errormessage">Login obligatoire</Message>
     <div class="inputfield">
       <span class="p-float-label">
         <InputText id="password" type="text" v-model="password" />
@@ -32,6 +32,7 @@ export default {
     return {
       username: null,
       password: null,
+      errormessage: false,
     };
   },
   methods: {
@@ -39,6 +40,7 @@ export default {
       const userlogin = {};
       userlogin.email = this.username;
       userlogin.password = this.password;
+      if(this.username===null){this.errormessage=true}
 
       login(userlogin)
         .then((re) => {
@@ -56,8 +58,13 @@ export default {
 </script>
 
 <style scoped>
+
+input{
+  height: 80px
+}
 .inputfield {
   width: 150px;
+  height: auto;
   margin: 30px auto;
 }
 </style>
