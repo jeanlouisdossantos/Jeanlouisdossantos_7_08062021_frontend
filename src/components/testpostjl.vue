@@ -115,10 +115,10 @@ export default {
       return user == store.state.userid || store.state.isAdmin;
     },
     showrefresh(){ 
-      console.log("refreshed")
+      
     getAllPost().then((response) => {
       this.posts = response.data;
-      console.log(this.posts);
+      
     })  
       
       }
@@ -127,7 +127,7 @@ export default {
   created() {
     getAllPost().then((response) => {
       this.posts = response.data;
-      console.log(this.posts);
+      
     });
   },
 };

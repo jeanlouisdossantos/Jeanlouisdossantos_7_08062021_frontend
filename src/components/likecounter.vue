@@ -13,37 +13,33 @@
 
 <script>
 import store from "../store";
-import { createlike, deletelike } from "../api/like.api";
+import { createlike, deletelike, getlikes } from "../api/like.api";
 export default {
   data() {
     return {
-      
+      likesdata: this.likesarray,
       userid: store.state.userid,
     };
   },
   methods: {
-
     likepost: function() {
       if (this.hasliked) {
-        /**delete like */
         deletelike(
           { userid: store.state.userid, type: "LIKE", postid: this.postid },
           store.state.token
         );
       } else {
-        /**create like */
         createlike(
           { userid: store.state.userid, type: "LIKE", postid: this.postid },
           store.state.token
         );
-
-
-
       }
-      this.$emit("refresh");
-      this.count = this.likesarray.length
-
-
+      // this.$emit("refresh");
+      getlikes(this.postid, store.state.userid).then((likes) => {
+        
+        this.likesdata = likes.data.like;
+      });
+      this.count = this.likesdata.length;
     },
     dislikepost: function() {
       if (this.hasdisliked) {
@@ -58,37 +54,39 @@ export default {
           { userid: store.state.userid, type: "DISLIKE", postid: this.postid },
           store.state.token
         );
-
       }
-      this.$emit("refresh")
-      this.count = this.likescount
-  }},
+      // this.$emit("refresh");
+      getlikes(this.postid, store.state.userid).then((likes) => {
+        
+        this.likesdata = likes.data.like;
+      });
+      this.count = this.likescount;
+    },
+  },
   props: ["likesarray", "postid"],
 
   computed: {
     hasliked: function() {
       return (
-        this.likesarray.filter(
+        this.likesdata.filter(
           (likes) => likes.userid == this.userid && likes.type == "LIKE"
         ).length >= 1
       );
     },
     hasdisliked: function() {
       return (
-        this.likesarray.filter(
+        this.likesdata.filter(
           (likes) => likes.userid == this.userid && likes.type == "DISLIKE"
         ).length >= 1
       );
     },
-    likescount : function(){
-    return  this.likesarray.filter(
-          (likes) => likes.type == "LIKE"
-        ).length - this.likesarray.filter(
-          (likes) => likes.type == "DISLIKE"
-        ).length
-  }
-  }
-
+    likescount: function() {
+      return (
+        this.likesdata.filter((likes) => likes.type == "LIKE").length -
+        this.likesdata.filter((likes) => likes.type == "DISLIKE").length
+      );
+    },
+  },
 };
 </script>
 <style scoped>
