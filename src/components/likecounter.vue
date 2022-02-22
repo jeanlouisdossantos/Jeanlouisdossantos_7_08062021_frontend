@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Compteur de like</h2>
     <span :class="{ green: hasliked }" @click="likepost"
       ><i class="fas fa-thumbs-up"></i
     ></span>
@@ -36,7 +35,6 @@ export default {
       }
       // this.$emit("refresh");
       getlikes(this.postid, store.state.userid).then((likes) => {
-        
         this.likesdata = likes.data.like;
       });
       this.count = this.likesdata.length;
@@ -57,7 +55,6 @@ export default {
       }
       // this.$emit("refresh");
       getlikes(this.postid, store.state.userid).then((likes) => {
-        
         this.likesdata = likes.data.like;
       });
       this.count = this.likescount;
