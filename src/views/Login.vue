@@ -6,8 +6,9 @@
         <InputText id="username" type="text" v-model="username" />
         <label for="username">Votre nom d'utilisateur</label>
       </span>
+      <Message severity="error" v-if="errormessage">Login obligatoire</Message>
     </div>
-<Message severity="error" v-if="errormessage">Login obligatoire</Message>
+
     <div class="inputfield">
       <span class="p-float-label">
         <InputText id="password" type="text" v-model="password" />
@@ -66,5 +67,9 @@ input{
   width: 150px;
   height: auto;
   margin: 30px auto;
+}
+
+.inputfield div{
+  width: 140%
 }
 </style>
