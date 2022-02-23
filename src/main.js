@@ -18,7 +18,7 @@ import Message from 'primevue/message';
 import likemodel from './components/likecounter.vue'
 
 
-import "primevue/resources/themes/bootstrap4-light-blue/theme.css" //theme
+import "primevue/resources/themes/md-light-indigo/theme.css" //theme
 import "primevue/resources/primevue.min.css"  // core css
 import "primeicons/primeicons.css"  //prime icons
 import 'primevue/message' // prime message

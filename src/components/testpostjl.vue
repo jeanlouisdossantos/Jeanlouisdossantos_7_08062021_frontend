@@ -5,12 +5,13 @@
       v-for="post in posts"
       :key="post.postid"
       id="post.postid"
+      
     >
       <template #header class="header">
         <img id="defaultlogo" alt="company logo" :src="companylogo" v-if="!post.imageurl" />
         <img :src="post.imageurl" alt="" class="imgcontainer" />
 
-        <Likes :likesarray=post.like :postid=post.postid v-on:refresh="showrefresh" />
+        
 
 
       </template>
@@ -29,6 +30,7 @@
             v-if="isOwnPost(post.user_id)"
           />
         </div>
+        <Likes :likesarray=post.like :postid=post.postid v-on:refresh="showrefresh" />
       </template>
 
       <template #footer>
@@ -36,13 +38,14 @@
           id="commentcard"
           v-for="comment in post.comment"
           :key="comment.id"
+          
         >
           <template #content style="margin-left: 40px">
-            <div class="commentaire">
-              <p>{{ comment.content }}</p>
+            <div class="commentaire" >
+              <p >{{ comment.content }}</p>
             </div>
-            <div class="user">
-              <p>commentaire de {{ comment.User.user }}</p>
+            <div class="user" >
+              <p >commentaire de {{ comment.User.user }}</p>
             </div>
           </template>
         </Card>
@@ -133,7 +136,15 @@ export default {
 };
 </script>
 
+<style>
+.p-card .p-card-body{
+  padding : 0px !important
+}
+</style>
+
+
 <style scoped>
+
 .header {
   display: flex;
   flex-flow: column wrap;
@@ -141,11 +152,13 @@ export default {
 .card {
   margin-top: 10px;
 }
+
 #maincontainer {
   margin-top: 20px;
 }
 #commentcard {
   margin-left: 40px;
+ 
 }
 #defaultlogo {
   margin-top: 30px;
@@ -157,5 +170,28 @@ export default {
 
 div.commentaire > div > div{
   margin : 10px 0px
+}
+.p-card-title p{
+  margin : 5px
+} 
+.p-card, .p-card-body{
+  padding : 0px
+}
+.p-button{
+  margin: 10px 0px;
+}
+
+.p-card-content div:nth-child(2){
+  margin-top: 15px
+}
+
+.p-card-footer .p-card{
+  background: linear-gradient(#8eccff, #b4f1a1);
+  padding: 0px;
+  margin-top: 5px;
+}
+
+.p-card-footer div div{
+  margin : 5px
 }
 </style>
