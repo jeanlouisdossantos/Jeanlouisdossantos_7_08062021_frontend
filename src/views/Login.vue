@@ -1,5 +1,12 @@
 <template>
   <!-- englober dans une balsie form -->
+<div class="welcome">
+  <h2>Bienvenue</h2>
+  <br>
+  <img :src="companylogo" alt="Logo de groupomania">
+</div>
+
+
   <div class="container">
     <div class="inputfield">
       <span class="p-float-label">
@@ -28,9 +35,12 @@
 <script>
 import { login } from "../api/auth.api";
 // import Button from "primevue/button";
+import companylogo from "../assets/groupomania.png"
+
 export default {
   data() {
     return {
+      companylogo: companylogo,
       username: null,
       password: null,
       errormessage: false,
@@ -59,6 +69,13 @@ export default {
 </script>
 
 <style scoped>
+@keyframes rotation {
+  to {transform: rotate3d(0,1,0,360deg);;}
+}
+
+img{
+  animation: rotation 1s ease-in 0.3s ;
+}
 
 input{
   height: 80px
