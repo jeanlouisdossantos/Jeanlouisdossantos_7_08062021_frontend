@@ -41,6 +41,14 @@
         iconPos="right"
         @click="onvalidatebuttonclicked"
       />
+
+      <Button
+        label="Supprimer l'utilisateur"
+        class="p-button-danger"
+        icon="pi pi-trash"
+        iconPos="right"
+        @click="ondeletebuttonclicked"
+      />
     </div>
   </div>
 
@@ -49,7 +57,7 @@
 
 <script>
 
-import { getUserDetails, updateUserDetails } from "../api/user.api"; 
+import { getUserDetails, updateUserDetails, deleteUser } from "../api/user.api"; 
 import store from "../store";
 
 export default {
@@ -71,10 +79,14 @@ export default {
       updateUserDetails(store.state.token, user).then(
         this.$router.push("/")
       ).catch(error => console.log(error) )
-      
+       
 
       
     },
+    ondeletebuttonclicked(){
+      deleteUser(store.state.token).then( response => console.log(response) )
+
+    }
   },
   created(){getUserDetails(store.state.token).then(response=> {
     this.user = response.data
