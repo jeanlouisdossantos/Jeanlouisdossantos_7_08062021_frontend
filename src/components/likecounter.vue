@@ -1,10 +1,10 @@
 <template>
   <div>
-    <span :class="{ green: hasliked }" @click="likepost"
+    <span class="like" :class="{ green: hasliked }" @click="likepost"
       ><i class="fas fa-thumbs-up"></i
     ></span>
-    <span>{{ likescount }}</span>
-    <span :class="{ red: hasdisliked }" @click="dislikepost"
+    <span class="countnumber">{{ likescount }}</span>
+    <span class="like" :class="{ red: hasdisliked }" @click="dislikepost"
       ><i class="fas fa-thumbs-down"></i
     ></span>
   </div>
@@ -87,12 +87,20 @@ export default {
 };
 </script>
 <style scoped>
+.like{
+  font-size: 2rem
+}
 .green {
   color: green;
-  font-size: 24px;
+  font-size: 2rem;
 }
 .red {
   color: red;
-  font-size: 24px;
+  font-size: 2rem;
+}
+
+.countnumber{
+  font-size: 2rem;
+  margin : 0 15px;
 }
 </style>
