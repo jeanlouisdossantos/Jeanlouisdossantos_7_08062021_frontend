@@ -18,7 +18,7 @@
 
     <div class="inputfield">
       <span class="p-float-label">
-        <InputText id="password" type="text" v-model="password" />
+        <InputText id="password" type="password" v-model="password" />
         <label for="password">Mot de passe</label>
       </span>
     </div>
