@@ -176,13 +176,13 @@ export default {
   justify-content: space-around;
 }
 .header2 > p {
-  color: red;
-  font-size: 2rem;
-  font-weight: bolder;
+  color: rgb(66, 83, 179);
+  font-size: 1.8rem;
+  font-weight: 600;
   margin: 0px;
 }
 .header2 > span {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 0px;
 }
 .card {
@@ -197,7 +197,7 @@ export default {
 }
 #defaultlogo {
   width: 120px;
-  
+
 }
 .imgcontainer {
   width: 200px;
