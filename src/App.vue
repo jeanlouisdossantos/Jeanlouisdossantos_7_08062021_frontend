@@ -10,6 +10,7 @@
 
     <div class="createPost">
       <router-link to="/createpost" v-if="token">
+      <div class="create-post-text" v-if="token">Créé un Post</div>
         <Button v-if="token" label="" icon="pi pi-plus" iconPos="right" />
       </router-link>
     </div>
@@ -66,11 +67,48 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-  
+}
+.navlist{
+  display : flex;
+  align-items: center;
+}
+.navlist>a{
+  vertical-align: middle;
+}
+.createPost>a{
+  display: flex ;
+}
+.create-post-text{
+  visibility: hidden;
+  margin : auto 5px
 }
 @media (min-width: 500px) {
-  .createPost::before {
-    content: "Création de post";
+ .create-post-text{
+  visibility: visible;
+}
+}
+@media(max-width: 500px){
+  .navlist{
+    flex-direction: column;
   }
+  .createPost{
+    display: flex;
+    align-items: center;
+  }
+  
+  .create-post-text{
+    width:0px
+  }
+}
+.createPost>a{
+    height:68px
+  }
+.logout{
+  display: flex;
+  align-items: center;
+  padding : 10px;
+}
+.logout>button{
+  height : 48px
 }
 </style>
