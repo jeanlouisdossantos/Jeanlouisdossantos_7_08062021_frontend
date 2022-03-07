@@ -149,6 +149,12 @@ export default {
 .p-card .p-card-content {
   padding: 2px !important;
 }
+
+@media (max-width : 640px) {
+.header1{
+  margin-bottom: 10px;
+}  
+}
 </style>
 
 <style scoped>
@@ -161,7 +167,7 @@ export default {
 }
 .header1 {
   width: 40%;
-  min-width: 200px;
+  min-width: 300px;
   border: 1px solid grey;
   border-radius: 10px;
 }
@@ -176,7 +182,6 @@ export default {
   justify-content: space-around;
 }
 .header2 > p {
-  color: rgb(66, 83, 179);
   font-size: 1.8rem;
   font-weight: 600;
   margin: 0px;
