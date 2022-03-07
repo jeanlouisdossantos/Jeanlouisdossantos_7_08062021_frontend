@@ -97,8 +97,11 @@ export default {
 };
 </script>
 <style scoped>
+button{
+  margin : 0 10px 10px 10px
+}
 .container {
-  border: 2px red dotted;
+  border: 2px rgb(63,81,181) solid;
   border-radius: 10px;
   margin: 20px;
 }
