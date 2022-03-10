@@ -7,20 +7,26 @@
       id="post.postid"
     >
       <template #header class="header">
-        <img id="defaultlogo" alt="company logo" :src="companylogo" v-if="!post.imageurl" />
-        <img :src="post.imageurl" alt="" class="imgcontainer" />
-
-        <Likes :likesarray=post.like :postid=post.postid v-on:refresh="showrefresh" />
-
-
-      </template>
-      <template #title>
-        <p>{{ post.title }}</p>
-      </template>
-
-      <template #content>
-        {{ post.content }}
-
+        <div class="post">
+          <div class="header1">
+            <img
+              id="defaultlogo"
+              alt="company logo"
+              :src="companylogo"
+              v-if="!post.imageurl"
+            />
+            <img
+              :src="post.imageurl"
+              alt=""
+              class="imgcontainer"
+              v-if="post.imageurl"
+            />
+          </div>
+          <div class="header2">
+            <p>{{ post.title }}</p>
+            <span>{{ post.content }}</span>
+          </div>
+        </div>
         <div class="supprimmer">
           <Button
             label="Supprimer"
@@ -29,6 +35,11 @@
             v-if="isOwnPost(post.user_id)"
           />
         </div>
+        <Likes
+          :likesarray="post.like"
+          :postid="post.postid"
+          v-on:refresh="showrefresh"
+        />
       </template>
 
       <template #footer>
@@ -79,9 +90,7 @@ import companylogo from "../assets/groupomania.png";
 import { getAllPost, createOneComment, deleteOnePost } from "../api/post.api";
 import store from "../store";
 
-
 export default {
- 
   data() {
     return {
       companylogo: companylogo,
@@ -109,38 +118,82 @@ export default {
     deleteOnePost(postid) {
       const posttodelete = postid;
       const token = store.state.token;
-      deleteOnePost(posttodelete, token);
+      deleteOnePost(posttodelete, token).then(
+     () => {getAllPost().then((response) => {
+            this.posts = response.data;
+          })}
+      );
     },
     isOwnPost: function(user) {
       return user == store.state.userid || store.state.isAdmin;
     },
-    showrefresh(){ 
-      console.log("refreshed")
-    getAllPost().then((response) => {
-      this.posts = response.data;
-      console.log(this.posts);
-    })  
-      
-      }
+    showrefresh() {
+      getAllPost().then((response) => {
+        this.posts = response.data;
+      });
+    },
   },
 
   created() {
     getAllPost().then((response) => {
       this.posts = response.data;
-      console.log(this.posts);
     });
   },
 };
 </script>
 
+<style>
+.p-card .p-card-body {
+  padding: 0px !important;
+}
+.p-card .p-card-content {
+  padding: 2px !important;
+}
+
+@media (max-width : 640px) {
+.header1{
+  margin-bottom: 10px;
+}  
+}
+</style>
+
 <style scoped>
-.header {
+.header,
+.post {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  min-height: 100px;
+}
+.header1 {
+  width: 40%;
+  min-width: 300px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.header2 {
+  width: 40%;
+  min-width: 200px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.header2 > p {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0px;
+}
+.header2 > span {
+  font-size: 1.2rem;
+  margin: 0px;
 }
 .card {
   margin-top: 10px;
 }
+
 #maincontainer {
   margin-top: 20px;
 }
@@ -148,10 +201,40 @@ export default {
   margin-left: 40px;
 }
 #defaultlogo {
-  margin-top: 30px;
   width: 120px;
+
 }
 .imgcontainer {
   width: 200px;
+  height: 100%;
+  margin: auto;
+}
+
+div.commentaire > div > div {
+  margin: 10px 0px;
+}
+.p-card-title p {
+  margin: 5px;
+}
+.p-card,
+.p-card-body {
+  padding: 0px;
+}
+.p-button {
+  margin: 10px 0px;
+}
+
+.p-card-content div:nth-child(2) {
+  margin-top: 15px;
+}
+
+.p-card-footer .p-card {
+  background: linear-gradient(#8eccff, #b4f1a1);
+  padding: 0px;
+  margin-top: 5px;
+}
+
+.p-card-footer div div {
+  margin: 5px;
 }
 </style>

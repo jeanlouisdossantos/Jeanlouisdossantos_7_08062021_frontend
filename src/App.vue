@@ -1,21 +1,17 @@
 <template>
   <div id="nav">
     <div class="navlist">
-      <router-link to="/login">Connexion | </router-link>
-      <router-link to="/signup">Inscription | </router-link>
+      <router-link to="/login" v-if="!token">Connexion | </router-link>
+      <router-link to="/signup" v-if="!token">Inscription | </router-link>
       <router-link to="/" v-if="token">Voir les post | </router-link>
       <router-link to="/about">A propos | </router-link>
-      <router-link to="/User" v-if="token" >User | </router-link>
+      <router-link to="/User" v-if="token">User | </router-link>
     </div>
 
     <div class="createPost">
       <router-link to="/createpost" v-if="token">
-        <Button
-          v-if="token"
-          label="Créer un nouveau post"
-          icon="pi pi-power-off"
-          iconPos="right"
-        />
+      <div class="create-post-text" v-if="token">Créé un Post</div>
+        <Button v-if="token" label="" icon="pi pi-plus" iconPos="right" />
       </router-link>
     </div>
 
@@ -34,7 +30,7 @@
 </template>
 
 <script>
-import { mapState,mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   methods: {
@@ -42,12 +38,9 @@ export default {
       this.$store.commit("logout");
     },
   },
-  computed: { ...mapState(["token"]),
-  ...mapGetters(['isLogged', 'isLogged'])
-               },
+  computed: { ...mapState(["token"]), ...mapGetters(["isLogged", "isLogged"]) },
 };
 </script>
-
 
 <style>
 #app {
@@ -74,5 +67,48 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.navlist{
+  display : flex;
+  align-items: center;
+}
+.navlist>a{
+  vertical-align: middle;
+}
+.createPost>a{
+  display: flex ;
+}
+.create-post-text{
+  visibility: hidden;
+  margin : auto 5px
+}
+@media (min-width: 500px) {
+ .create-post-text{
+  visibility: visible;
+}
+}
+@media(max-width: 500px){
+  .navlist{
+    flex-direction: column;
+  }
+  .createPost{
+    display: flex;
+    align-items: center;
+  }
+  
+  .create-post-text{
+    width:0px
+  }
+}
+.createPost>a{
+    height:68px
+  }
+.logout{
+  display: flex;
+  align-items: center;
+  padding : 10px;
+}
+.logout>button{
+  height : 48px
 }
 </style>

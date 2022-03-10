@@ -12,3 +12,9 @@ export const updateUserDetails = async (token, user) =>{
     let response = await axios.put(process.env.VUE_APP_APIURL+"user/", user)
     return response
 }
+
+export const deleteUser = async (token) => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    let response = await axios.delete(process.env.VUE_APP_APIURL+"user/")
+    return response
+}
