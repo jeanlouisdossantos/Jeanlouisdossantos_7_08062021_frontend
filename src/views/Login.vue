@@ -21,6 +21,7 @@
         <InputText id="password" type="password" v-model="password" />
         <label for="password">Mot de passe</label>
       </span>
+
     </div>
 
     <Button
@@ -30,6 +31,7 @@
       @click="onvalidatebuttonclicked"
     />
   </div>
+  
 </template>
 
 <script>
