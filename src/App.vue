@@ -10,7 +10,7 @@
 
     <div class="createPost">
       <router-link to="/createpost" v-if="token">
-      <div class="create-post-text" v-if="token">Créé un Post</div>
+        <div class="create-post-text" v-if="token">Créé un Post</div>
         <Button v-if="token" label="" icon="pi pi-plus" iconPos="right" />
       </router-link>
     </div>
@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import {  mapState, mapGetters } from "vuex";
+
 
 export default {
   methods: {
@@ -38,8 +39,9 @@ export default {
       this.$store.commit("logout");
     },
   },
-  computed: { ...mapState(["token"]), ...mapGetters(["isLogged", "isLogged"]) },
-};
+  computed : {...mapState(["token"]),  ...mapGetters(["isLogged", "isLogged"]) },  
+ 
+}
 </script>
 
 <style>
@@ -68,47 +70,47 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-.navlist{
-  display : flex;
+.navlist {
+  display: flex;
   align-items: center;
 }
-.navlist>a{
+.navlist > a {
   vertical-align: middle;
 }
-.createPost>a{
-  display: flex ;
+.createPost > a {
+  display: flex;
 }
-.create-post-text{
+.create-post-text {
   visibility: hidden;
-  margin : auto 5px
+  margin: auto 5px;
 }
 @media (min-width: 500px) {
- .create-post-text{
-  visibility: visible;
+  .create-post-text {
+    visibility: visible;
+  }
 }
-}
-@media(max-width: 500px){
-  .navlist{
+@media (max-width: 500px) {
+  .navlist {
     flex-direction: column;
   }
-  .createPost{
+  .createPost {
     display: flex;
     align-items: center;
   }
-  
-  .create-post-text{
-    width:0px
+
+  .create-post-text {
+    width: 0px;
   }
 }
-.createPost>a{
-    height:68px
-  }
-.logout{
+.createPost > a {
+  height: 68px;
+}
+.logout {
   display: flex;
   align-items: center;
-  padding : 10px;
+  padding: 10px;
 }
-.logout>button{
-  height : 48px
+.logout > button {
+  height: 48px;
 }
 </style>

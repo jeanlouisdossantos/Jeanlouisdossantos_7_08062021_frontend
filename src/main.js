@@ -36,4 +36,3 @@ app.component("Message" , Message)
 app.component("Likes", likemodel)
 
 app.use(router).use(store).mount('#app');
-

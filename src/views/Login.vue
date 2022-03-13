@@ -63,6 +63,7 @@ export default {
           datastore.userid = re.data.userId;
           this.$store.commit("login", datastore);
           this.$router.push("/");
+          localStorage.setItem("GroupomaniaToken", JSON.stringify(datastore) )
         })
         .catch((error) => console.log(error));
     },
