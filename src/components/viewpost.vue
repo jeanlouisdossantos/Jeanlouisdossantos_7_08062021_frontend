@@ -229,7 +229,7 @@ div.commentaire > div > div {
 }
 
 .p-card-footer .p-card {
-  background: linear-gradient(#8eccff, #b4f1a1);
+  background: linear-gradient(#8eccff, #b6e9f0);
   padding: 0px;
   margin-top: 5px;
 }

@@ -1,20 +1,20 @@
 <template>
   <div class="home">
     
-         <Testpostjl />
+         <Viewpost />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import Testpostjl from '../components/testpostjl.vue'
+import Viewpost from '../components/viewpost.vue'
 import store from "../store/index"
 export default {
   store,
   name: 'Home',
   components: {
-    Testpostjl,
+    Viewpost,
   }
 }
 </script>

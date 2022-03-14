@@ -24,6 +24,7 @@ export default createStore({
     logout(state) {
       state.token = null;
       state.isAuth = null;
+      localStorage.removeItem("GroupomaniaToken")
       router.push("/login");
     },
   },
