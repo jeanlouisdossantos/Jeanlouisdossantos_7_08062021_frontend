@@ -13,8 +13,8 @@ const routes = [
     component: Home,
     beforeEnter: (to, from, next) => {
       let datastore = JSON.parse(localStorage.getItem("GroupomaniaToken"));
-      console.log(datastore)
-      if (datastore) {
+      console.log(datastore.date-Date.now())
+      if (datastore&& Date.now()-datastore.date<86400000 ) {
         store.commit("login", datastore);
         
       }
